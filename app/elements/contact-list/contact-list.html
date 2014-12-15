@@ -1,0 +1,54 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="contact-list" attributes="">
+  <template>
+    <link rel="stylesheet" href="contact-list.css">
+    <div class='liveExample'>
+
+      <h2>Contacts</h2>
+      <div id='contactsList'>
+        <table class='contactsEditor'>
+          <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Phone numbers</th>
+          </tr>
+          <tbody>
+          <template  repeat='{{c,cidx in contacts}}'>
+          <tr>
+            <td>
+              <input value='{{c.firstName}}' />
+              <div><a href='javascript:;' on-tap='{{removeContact}}'>Delete</a></div>
+            </td>
+            <td><input value='{{c.lastName}}' /></td>
+            <td>
+              <table>
+                <tbody>
+                <template  repeat='{{p, pidx in c.phones}}'>
+                <tr>
+                  <td><input value='{{p.type}}' /></td>
+                  <td><input value='{{p.number}}' /></td>
+                  <td><a href='javascript:;' on-tap='{{removePhone}}'>Delete</a></td>
+                </tr>
+                </template>
+                </tbody>
+              </table>
+              <a href='javascript:;' on-tap='{{addPhone}}'>Add number</a>
+            </td>
+          </tr>
+          </template>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        <button on-tap='{{addContact}}'>Add a contact</button>
+        <button on-tap='{{saveToJson}}' disabled?='{{contacts.length == 0}}'}>Save to JSON</button>
+      </p>
+
+      <textarea value='{{lastSavedJson}}' rows='5' cols='60' disabled='disabled'> </textarea>
+
+    </div>
+  </template>
+  <script src="contact-list.js"></script>
+</polymer-element>
